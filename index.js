@@ -24,14 +24,18 @@ let todosCount = todoList.length;
 
 function onAddTodo(){
     let UserInputElement = document.getElementById("todoUserInput");
-    UserInputElementValue = UserInputElement.value;
+    UserInputValue = UserInputElement.value;
+    if(UserInputValue===""){
+        alert("Enter valid text");
+        return;
+    }
     todosCount+=1; 
     let newTodo = {
-        text:UserInputElementValue,
+        text:UserInputValue,
         uniqueNo:todosCount
     };
     createAndAppendTodo(newTodo);
-    UserInputElementValue = " ";
+    UserInputValue = "";
 }
 
 
