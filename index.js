@@ -28,6 +28,20 @@ for(let todo of todoList){
     createAndAppendTodo(todo);
 } 
 
+function onTodoStatusChange(checkboxId,labelId){
+    let checkboxElement = document.getElementById(checkboxId);
+    console.log(checkboxElement.checked);
+
+    let labelElement = document.getElementById(labelId);
+
+    if(checkboxElement.checked === true){
+        labelElement.classList.add("checked");
+    }
+    else{
+        labelElement.classList.remove("checked");
+    }
+}
+
 //creating Reusable function to create multiple Todo tasks at a time
 function createAndAppendTodo(todo){
     let todoElement =document.createElement('li');
@@ -36,9 +50,13 @@ function createAndAppendTodo(todo){
 
     let inputElement = document.createElement("input");
     let checkboxId="checkbox"+todo.uniqueNo;
+    let labelId = "label"+todo.uniqueNo;
     inputElement.type="checkbox";
     inputElement.id =checkboxId;
     inputElement.classList.add("checkbox-input");
+    inputElement.onclick = function(){
+        onTodoStatusChange(checkboxId,labelId);
+    }
     todoElement.appendChild(inputElement);
 
     let labelContainer = document.createElement("div");
@@ -48,6 +66,7 @@ function createAndAppendTodo(todo){
     let labelElement = document.createElement("label");
     //labelElement.htmlFor = "checkboxInput";
     labelElement.setAttribute("for",checkboxId);
+    labelElement.id = labelId;
     labelElement.classList.add("checkbox-label");
     labelElement.textContent=todo.text;
     labelContainer.appendChild(labelElement);
