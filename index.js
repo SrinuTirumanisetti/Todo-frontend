@@ -34,12 +34,13 @@ function onTodoStatusChange(checkboxId,labelId){
 
     let labelElement = document.getElementById(labelId);
 
-    if(checkboxElement.checked === true){
-        labelElement.classList.add("checked");
-    }
-    else{
-        labelElement.classList.remove("checked");
-    }
+    // if(checkboxElement.checked === true){
+    //     labelElement.classList.add("checked");
+    // }
+    // else{
+    //     labelElement.classList.remove("checked");
+    // }
+    labelElement.classList.toggle("checked");
 }
 
 //creating Reusable function to create multiple Todo tasks at a time
