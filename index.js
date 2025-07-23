@@ -1,4 +1,5 @@
 let todoItemsContainer = document.getElementById("todoItemsContainer");
+let addTodoButton = document.getElementById("addTodoButton");
 
 let todoList = [
     {
@@ -18,6 +19,25 @@ let todoList = [
         uniqueNo:4
     }
 ];
+
+let todosCount = todoList.length;
+
+function onAddTodo(){
+    let UserInputElement = document.getElementById("todoUserInput");
+    UserInputElementValue = UserInputElement.value;
+    todosCount+=1; 
+    let newTodo = {
+        text:UserInputElementValue,
+        uniqueNo:todosCount
+    };
+    createAndAppendTodo(newTodo);
+    UserInputElementValue = " ";
+}
+
+
+addTodoButton.onclick = function(){
+    onAddTodo();
+}
 
 // createAndAppendTodo(todoList[0]);
 // createAndAppendTodo(todoList[1]);
