@@ -43,9 +43,17 @@ function onTodoStatusChange(checkboxId,labelId){
     labelElement.classList.toggle("checked");
 }
 
+function onDeleteTodo(todoId){
+    let todoElement = document.getElementById(todoId);
+    todoItemsContainer.removeChild(todoElement); 
+}
+
+
 //creating Reusable function to create multiple Todo tasks at a time
 function createAndAppendTodo(todo){
+    let todoId = "todo" + todo.uniqueNo;
     let todoElement =document.createElement('li');
+    todoElement.id = todoId;
     todoElement.classList.add("todo-item-container","d-flex","flex-row");
     todoItemsContainer.appendChild(todoElement);
 
@@ -80,5 +88,8 @@ function createAndAppendTodo(todo){
     deleteIcon.classList.add("material-icons","delete-icon");
     deleteIcon.textContent="delete";
     deleteIconContainer.appendChild(deleteIcon);
+    deleteIcon.onclick = function(){
+        onDeleteTodo(todoId);
+    }
 } 
 

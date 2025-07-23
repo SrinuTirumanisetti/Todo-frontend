@@ -94,12 +94,22 @@ border-radius: 5px;
 }
 
 .delete-icon-container {
-text-align: right;
+  text-align: right;
+  cursor: pointer; 
 }
 
 .delete-icon {
   padding: 15px;
+  color: #000; 
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
+
+.delete-icon:hover {
+  color: #000;
+}
+
 
 .checked{
   text-decoration: line-through;
