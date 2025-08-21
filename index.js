@@ -31,7 +31,8 @@ function onAddTodo(){
     todosCount+=1; 
     let newTodo = {
         text:UserInputValue,
-        uniqueNo:todosCount
+        uniqueNo:todosCount,
+        isChecked:false
     };
     todoList.push(newTodo);
     createAndAppendTodo(newTodo);
@@ -52,7 +53,7 @@ for(let todo of todoList){
     createAndAppendTodo(todo);
 } 
 
-function onTodoStatusChange(checkboxId,labelId){
+function onTodoStatusChange(todoId,checkboxId,labelId){
     let checkboxElement = document.getElementById(checkboxId);
     console.log(checkboxElement.checked);
 
@@ -64,6 +65,23 @@ function onTodoStatusChange(checkboxId,labelId){
     // else{
     //     labelElement.classList.remove("checked");
     // }
+    let todoObjectIndex=todoList.findIndex(function(eachTodo){
+        let eachTodoId = "todo"+eachTodo.uniqueNo;
+        if(eachTodoId===todoId){
+            return true;
+        }
+        else{
+            return false;
+        }
+    })
+
+    let todoObject = todoList[todoObjectIndex];
+    if(todoObject.isChecked === true){
+        todoObject.isChecked=false;
+    }
+    else{
+        todoObject.isChecked=true;
+    }
     labelElement.classList.toggle("checked");
 }
 
@@ -97,9 +115,10 @@ function createAndAppendTodo(todo){
     let labelId = "label"+todo.uniqueNo;
     inputElement.type="checkbox";
     inputElement.id =checkboxId;
+    inputElement.checked = todo.isChecked;
     inputElement.classList.add("checkbox-input");
     inputElement.onclick = function(){
-        onTodoStatusChange(checkboxId,labelId);
+        onTodoStatusChange(todoId,checkboxId,labelId);
     }
     todoElement.appendChild(inputElement);
 
@@ -114,6 +133,10 @@ function createAndAppendTodo(todo){
     labelElement.classList.add("checkbox-label");
     labelElement.textContent=todo.text;
     labelContainer.appendChild(labelElement);
+
+    if(todo.isChecked===true){
+        labelElement.classList.add("checked");
+    }
 
     let deleteIconContainer = document.createElement("div");
     deleteIconContainer.classList.add("delete-icon-container");
